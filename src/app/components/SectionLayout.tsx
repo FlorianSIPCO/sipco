@@ -1,83 +1,51 @@
 import Image from "next/image";
-import { ReactNode } from "react";
+import React, { forwardRef, ReactNode } from "react";
+import CTA from "./CTA";
+import MenuButton from "./MenuButton";
 
 type SectionLayoutProps = {
-  bgImage: string;
-  logo?: ReactNode;
-  title?: ReactNode;
-  subtitle?: ReactNode;
-  menu?: ReactNode;
-  progressBar?: ReactNode;
-  cta?: ReactNode;
-  overlay?: ReactNode;
-  showOverlay?: boolean;
-  children?: ReactNode; // fallback for custom
-  className?: string;
+  imgSrc: string;
+  children?: ReactNode;
 };
 
-export default function SectionLayout({
-  bgImage,
-  logo,
-  title,
-  subtitle,
-  menu,
-  progressBar,
-  cta,
-  overlay,
-  showOverlay = false,
-  children,
-  className
-}: SectionLayoutProps) {
-  return (
-    <section className={`relative min-h-screen w-full overflow-hidden flex flex-col z-10 ${className || ""}`}>
-      {/* Background image */}
-      <Image
-        src={bgImage}
-        alt="background"
-        fill
-        priority
-        className="object-contain z-0 transition-all duration-700 ease-in-out"
-      />
-      {/* Overlay bandeau */}
-      {overlay && (
-        <div
-          className={`absolute top-0 right-0 h-full z-30 transition-all duration-700 ease-in-out`}
-          style={{
-            width: showOverlay ? "40vw" : 0,
-            opacity: showOverlay ? 1 : 0,
-            pointerEvents: showOverlay ? "auto" : "none",
-            background: "rgba(245,245,245,0.98)",
-            boxShadow: showOverlay ? "-8px 0 24px #0002" : "none"
-          }}
-        >
-          {overlay}
-        </div>
-      )}
-
-      {/* Logo SIPCO */}
-      {logo && (
-        <div className="absolute top-1 left-1/2 -translate-x-1/2 z-20">{logo}</div>
-      )}
-
-      {/* Menu et progressBar */}
-      <div className="absolute top-10 right-10 flex flex-col items-center z-20">
-        {menu}
-        {progressBar}
+const SectionLayout = forwardRef<HTMLDivElement, SectionLayoutProps>(
+  ({ imgSrc, children }, ref) => (
+    <div
+      ref={ref}
+      className="section-anim absolute left-0 top-0 w-screen h-screen overflow-hidden"
+    >
+      {/* BG IMAGE */}
+      <div className="section-img absolute inset-0 z-0 pointer-events-none">
+        <Image
+          src={imgSrc}
+          alt=""
+          fill
+          className="object-cover"
+          priority
+        />
       </div>
 
-      {/* Titre/sous-titre */}
-      <div className="flex flex-col items-left justify-center h-screen ml-[53%] pb-[6%] z-20">
-        {subtitle}
-        {title}
+      {/* LOGO - CENTRÉ HAUT */}
+      <div className="absolute left-1/2 top-6 -translate-x-1/2 z-20 flex items-center">
+        <Image src='/images/logo.png' alt="Logo SIPCO" width={220} height={60} />
       </div>
 
-      {/* CTA */}
-      <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
-        <div className="pointer-events-auto">{cta}</div>
+      {/* MENU BUTTON + PROGRESSBAR - EN HAUT À DROITE */}
+      <div className="absolute top-10 right-10 z-20 flex flex-col items-center gap-5">
+        <MenuButton />
       </div>
 
-      {/* Pour du custom si besoin */}
-      {children}
-    </section>
-  );
-}
+      {/* CTA - CENTRÉ VERTICALEMENT */}
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-30">
+        <CTA />
+      </div>
+
+      {/* CONTENU PERSONNALISÉ (titre, description...) */}
+      <div className="absolute top-4/11 left-6/12 ml-10 transform z-30 flex flex-col items-start">
+        {children}
+      </div>
+    </div>
+  )
+);
+SectionLayout.displayName = "SectionLayout";
+export default SectionLayout;
