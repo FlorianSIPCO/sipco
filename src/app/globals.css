@@ -116,3 +116,15 @@ button {
 .animate-spin-slow {
   animation: spin-slow 2s linear infinite;
 }
+
+/* Animation du CTA scroll */
+
+@keyframes sipco-bounce {
+  0%, 100% { transform: translateY(0); }
+  20% { transform: translateY(8px); }
+  50% { transform: translateY(0px); }
+  80% { transform: translateY(8px); }
+}
+.sipco-bounce {
+  animation: sipco-bounce 2s infinite ease-out;
+}

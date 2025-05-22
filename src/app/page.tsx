@@ -11,13 +11,16 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Home() {
   // Animation d'intro (step)
   const [step, setStep] = useState<"intro" | "story">("intro");
-  // const [loading, setLoading] = useState(true);
+  const [isReady, setIsReady] = useState(false);
   const [progress, setProgress] = useState(0);
 
   // refs for intro
   const introRef = useRef<HTMLDivElement>(null);
   const counterRef = useRef<HTMLHeadingElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
+
+  // Ref pour fade-in header
+  const headerStoryRef = useRef<HTMLDivElement>(null);
 
   // Intro progress counter
   useEffect(() => {
@@ -46,10 +49,23 @@ export default function Home() {
         opacity: 0,
         y: -60,
         duration: 0.7,
-        onComplete: () => setStep("story")
+        onComplete: () => {
+          setStep("story");
+          setTimeout(() => setIsReady(true), 0);
+        }
       })
     }
   }
+
+  useEffect(() => {
+    if (step === "story" && headerStoryRef.current) {
+      // GSAP: Fade-in header section à l'arrivée
+      gsap.fromTo(headerStoryRef.current, 
+        { opacity: 0, y: 40 }, 
+        { opacity: 1, y: 0, duration: 1.1, ease: "power2.out" }
+      );
+    }
+  }, [step]);
 
   return (
     <main className="w-full">
@@ -75,7 +91,7 @@ export default function Home() {
               {progress}%
             </h1>
 
-            {/* Bouton (même place) */}
+            {/* Bouton */}
             <button
               ref={buttonRef}
               className="relative inset-0 flex items-center justify-center font-orbitron cta-gradient py-2 px-6 rounded mb-2 cursor-pointer transition focus:outline-none"
@@ -94,7 +110,7 @@ export default function Home() {
         </div>
       ) : null}
              
-      {step === "story" && (
+      {step === "story" && isReady && (
         <Storytelling />
       )}
     </main>
