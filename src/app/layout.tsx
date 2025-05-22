@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Barlow, Orbitron, Montserrat } from "next/font/google";
 import "./globals.css";
+import { SectionTracker } from "./components/SectionTracker";
+import { MenuProvider } from "./context/MenuContext";
+import { MenuOverlay } from "./components/MenuOverlay";
 
 const barlow = Barlow({
   subsets: ["latin"],
@@ -63,7 +66,11 @@ export default function RootLayout({
   return (
     <html lang="fr" className={`${barlow.variable} ${orbitron.variable} ${montserrat.variable}`}>
       <body className='antialiased'>
-        {children}
+        <MenuProvider>
+          <SectionTracker />
+          <MenuOverlay />
+            {children}
+        </MenuProvider>
       </body>
     </html>
   );

@@ -1,9 +1,11 @@
 import { Plus } from "lucide-react";
+import { useMenu } from "../context/MenuContext";
 
-export default function MenuButton({ onClick }: { onClick?: () => void }) {
+export default function MenuButton() {
+  const { setMenuOpen } = useMenu();
   return (
     <button
-      onClick={onClick}
+      onClick={() => setMenuOpen(true)}
       className="w-14 h-14 relative flex items-center justify-center rounded-full bg-transparent outline-none border-none p-0"
       style={{ minWidth: 56, minHeight: 56 }}
       aria-label="Ouvrir le menu"
