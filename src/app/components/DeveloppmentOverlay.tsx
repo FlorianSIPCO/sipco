@@ -25,7 +25,7 @@ export default function DeveloppmentOverlay({ onClose, open }: { onClose: () => 
       <div className="w-full h-full flex flex-col px-20 py-12 overflow-y-auto bg-black">
         <div className="flex justify-between items-center">
           <h2 className="text-red-600 text-5xl">Développement</h2>
-          <button onClick={onClose} className="self-end text-xl font-bold text-white transition hover:text-red-600 hover:rotate-180">✕</button>
+          <button onClick={onClose} className="self-start text-xl font-bold text-white transition hover:text-red-600 hover:rotate-180">✕</button>
         </div>
         <p className="my-8 text-xl mr-10">[Insère ici ton contenu…]</p>
       </div>

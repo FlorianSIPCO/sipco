@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Barlow, Orbitron, Geist_Mono } from "next/font/google";
+import { Barlow, Orbitron, Montserrat } from "next/font/google";
 import "./globals.css";
 
 const barlow = Barlow({
@@ -14,8 +14,9 @@ const orbitron = Orbitron({
   weight: ["400", "500", "600", "700", "800", "900"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
+  weight: ["400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
 });
 
@@ -60,7 +61,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" className={`${barlow.variable} ${orbitron.variable} ${geistMono.variable}`}>
+    <html lang="fr" className={`${barlow.variable} ${orbitron.variable} ${montserrat.variable}`}>
       <body className='antialiased'>
         {children}
       </body>

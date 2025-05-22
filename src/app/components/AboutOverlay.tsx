@@ -27,7 +27,7 @@ export default function AboutOverlay({ onClose, open }: { onClose: () => void; o
       <div className="w-full h-full flex flex-col px-20 py-12 overflow-y-auto bg-black">
         <div className="flex justify-between items-center">
           <h2 className="text-red-600 text-5xl">SIPCO depuis 1982</h2>
-          <button onClick={onClose} className="self-end text-xl font-bold text-white transition hover:text-red-600 hover:rotate-180">✕</button>
+          <button onClick={onClose} className="self-start text-xl font-bold text-white transition hover:text-red-600 hover:rotate-180">✕</button>
         </div>
         <p className="my-8 text-xl mr-10">
           Fondée en 1982 pour faire face aux besoins croissants du secteur agroalimentaire en informatique, Sipco a très rapidement ciblé une clientèle plus large.<br/> De la grande entreprise internationale à la PME-PMI, de l’artisan au particulier, de l’éducation nationale aux collectivités locales, SIPCO propose des solutions multiples pour répondre aux exigences de sa clientèle.
@@ -61,13 +61,17 @@ export default function AboutOverlay({ onClose, open }: { onClose: () => void; o
           Affiliée au réseau Alliance du Numérique, SIPCO bénéficie d’accords particuliers avec les plus grands acteurs du marché, aussi bien sur le matériel que sur les logiciels.
         </p>
         <Image
-          src="/images/video.png"
+          src="/images/data.png"
           alt="Voir la vidéo SIPCO"
           height={570}
           width={570}
-          className="object-cover transition"
+          className="object-cover transition rounded-xl"
           draggable={false}
         />
+
+        <p className="my-8 text-xl mr-10">
+          Nous sommes une équipe jeune qui suit l&apos;évolution des technologies pour vous offrir des services de qualité et répondant à la demande du marché.
+        </p>
       </div>
 
 
